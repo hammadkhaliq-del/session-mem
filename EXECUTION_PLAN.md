@@ -11,7 +11,9 @@
 ### M1: Repo scaffolding + DB schema
 - **Goal**: Set up project structure and SQLite schema for event storage.
 - **Depends on**: Nothing. Start here.
-- **Deliverable**: Repo with `/src`, `/db`, `README.md` stub; `session.db` created with `events` table: `id, timestamp, source, content, project_path`. node:sqlite (built-in) instead of a third-party package
+- **Language/runtime**: Node.js, minimum v22.13.0 (required for `node:sqlite` without experimental flag warnings).
+- **DB access**: Built-in `node:sqlite` module (`DatabaseSync`) — no third-party dependency, no native compile step.
+- **Deliverable**: Repo with `/src`, `/db`, `package.json`, `README.md` stub; `session.db` created with `events` table: `id, timestamp, source, content, project_path`.
 - **Done-check**: Can manually insert a row and query it back via a script.
 - **Status**: NOT STARTED
 
