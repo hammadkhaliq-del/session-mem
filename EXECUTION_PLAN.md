@@ -11,7 +11,7 @@
 ### M1: Repo scaffolding + DB schema
 - **Goal**: Set up project structure and SQLite schema for event storage.
 - **Depends on**: Nothing. Start here.
-- **Deliverable**: Repo with `/src`, `/db`, `README.md` stub; `session.db` created with `events` table: `id, timestamp, source, content, project_path`.
+- **Deliverable**: Repo with `/src`, `/db`, `README.md` stub; `session.db` created with `events` table: `id, timestamp, source, content, project_path`. node:sqlite (built-in) instead of a third-party package
 - **Done-check**: Can manually insert a row and query it back via a script.
 - **Status**: NOT STARTED
 
