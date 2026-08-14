@@ -15,7 +15,7 @@
 - **DB access**: Built-in `node:sqlite` module (`DatabaseSync`) — no third-party dependency, no native compile step.
 - **Deliverable**: Repo with `/src`, `/db`, `package.json`, `README.md` stub; `session.db` created with `events` table: `id, timestamp, source, content, project_path`.
 - **Done-check**: Can manually insert a row and query it back via a script.
-- **Status**: NOT STARTED
+- **Status**: ✅ DONE
 
 ### M2: Terminal command logger
 - **Goal**: Capture every zsh/bash command run, with timestamp, written to `events` table with `source='terminal'`.
@@ -113,5 +113,5 @@
 ---
 
 ## Current overall status
-**Active module**: M1
-**Last updated**: 2026-08-13
+**Active module**: M2
+**Last updated**: 2026-08-14

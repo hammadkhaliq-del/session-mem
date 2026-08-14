@@ -1,0 +1,25 @@
+{
+  "name": "sessionmem",
+  "version": "0.1.0",
+  "description": "An agent that logs your coding session and lets you query it in plain language.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "bin": {
+    "sessionmem": "./bin/sessionmem.js"
+  },
+  "scripts": {
+    "start": "node bin/sessionmem.js",
+    "test": "node scripts/verify-m1.js",
+    "init-db": "node scripts/init-db.js"
+  },
+  "keywords": [
+    "session",
+    "memory",
+    "logging",
+    "developer-tools",
+    "cli"
+  ],
+  "license": "MIT"
+}
