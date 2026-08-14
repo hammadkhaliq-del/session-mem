@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Database files
+*.db
+*.db-journal
+*.db-wal
+
+# Environment
+.env
+.env.local
+
+# OS junk
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Personal Learning
+M1_NOTES.md
