@@ -74,3 +74,4 @@ session-mem/
 See [SPEC.md](SPEC.md) for scope decisions, privacy boundaries, and the definition of "done."
 
 See [EXECUTION_PLAN.md](EXECUTION_PLAN.md) for the module-by-module build plan.
+<!-- M3 manual test -->

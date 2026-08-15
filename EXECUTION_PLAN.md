@@ -31,7 +31,7 @@
 - **Depends on**: M1.
 - **Deliverable**: VS Code extension OR filesystem watcher (e.g. `watchdog` in Python / `chokidar` in Node) monitoring the project directory for save events.
 - **Done-check**: Edit and save 5 files in a real coding session, confirm all 5 logged with correct filename + timestamp.
-- **Status**: NOT STARTED
+- **Status**: ✅ DONE
 
 ### M4: Secret filtering
 - **Goal**: Prevent secrets (API keys, tokens, passwords) from being written to the log.
@@ -115,5 +115,5 @@
 ---
 
 ## Current overall status
-**Active module**: M3
+**Active module**: M4
 **Last updated**: 2026-08-15
