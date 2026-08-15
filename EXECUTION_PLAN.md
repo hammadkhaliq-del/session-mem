@@ -18,11 +18,13 @@
 - **Status**: ✅ DONE
 
 ### M2: Terminal command logger
-- **Goal**: Capture every zsh/bash command run, with timestamp, written to `events` table with `source='terminal'`.
+- **Goal**: Capture every shell command run, with timestamp, written to `events` table with `source='terminal'`.
 - **Depends on**: M1 (schema must exist).
-- **Deliverable**: A shell hook (`.zshrc`/`.bashrc` addition or wrapper function) that writes each command to the DB.
-- **Done-check**: Run 10 real commands in a normal session, confirm all 10 appear correctly in `session.db` with correct timestamps.
-- **Status**: NOT STARTED
+- **Primary shell**: PowerShell (Windows) — this is the actual test environment. Bash/zsh hooks are a later target (post-M2), not a parallel deliverable.
+- **Architecture**: Shell hook appends raw events to a flat file queue (`~/.sessionmem/queue.jsonl`) synchronously (sub-millisecond, no process spawn). A separate Node.js flusher batches those lines into SQLite. No per-command Node/process overhead.
+- **Deliverable**: PowerShell prompt hook (manually installed in `$PROFILE`) + `sessionmem flush` CLI command.
+- **Done-check**: Run 10 real commands in a normal session, run `sessionmem flush`, confirm all 10 appear correctly in `session.db` with correct timestamps.
+- **Status**: ✅ DONE
 
 ### M3: File-save event logger
 - **Goal**: Capture file save events in VS Code for the active project, `source='file'`.
@@ -113,5 +115,5 @@
 ---
 
 ## Current overall status
-**Active module**: M2
-**Last updated**: 2026-08-14
+**Active module**: M3
+**Last updated**: 2026-08-15
