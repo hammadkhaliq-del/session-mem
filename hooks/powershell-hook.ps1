@@ -18,7 +18,15 @@ function prompt {
 
         # Escape backslashes and double-quotes for valid JSON
         $escapedContent = $lastCmd.CommandLine -replace '\\','\\' -replace '"','\"'
-        $escapedPath = (Get-Location).Path -replace '\\','\\' -replace '"','\"'
+
+        # Resolve project root: walk up to nearest .git instead of raw cwd
+        $__smDir = (Get-Location).Path
+        while ($__smDir -and -not (Test-Path (Join-Path $__smDir '.git'))) {
+            $__smParent = Split-Path $__smDir -Parent
+            if ($__smParent -eq $__smDir) { break }  # filesystem root
+            $__smDir = $__smParent
+        }
+        $escapedPath = $__smDir -replace '\\','\\' -replace '"','\"'
         $ts = Get-Date -Format "o"
 
         $entry = "{""timestamp"":""$ts"",""source"":""terminal"",""content"":""$escapedContent"",""project_path"":""$escapedPath""}"
