@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "node bin/sessionmem.js",
-    "test": "node scripts/verify-m1.js",
+    "test": "node scripts/verify-m1.js && node scripts/verify-m2.js",
     "init-db": "node scripts/init-db.js"
   },
   "keywords": [
