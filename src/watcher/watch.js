@@ -96,7 +96,7 @@ function getQueuePath() {
     // On Windows, also set ACL via icacls (mode flag is POSIX-only)
     if (process.platform === 'win32') {
       try {
-        execSync(`icacls "${queuePath}" /inheritance:r /grant:r "%USERNAME%:(R,W)"`, { stdio: 'ignore' });
+        execSync(`icacls "${queuePath}" /inheritance:r /grant:r "%USERNAME%:(M)"`, { stdio: 'ignore' });
       } catch {
         // Best-effort — don't fail the watcher if ACL command fails
       }
