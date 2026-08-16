@@ -4,6 +4,7 @@ import { mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { homedir } from 'node:os';
 import { fileURLToPath } from 'node:url';
+import { redactSecrets } from '../filters/secrets.js';
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -80,13 +81,14 @@ export function closeDb() {
 
 /**
  * Insert a single event into the events table.
+ * For source='terminal', secrets are redacted before storage.
  *
  * @param {object} event
  * @param {string} event.timestamp   — ISO 8601 string
  * @param {string} event.source      — 'terminal' | 'file' | 'browser'
  * @param {string} event.content     — the logged content (command, filename, etc.)
  * @param {string} event.projectPath — absolute path to the project directory
- * @returns {{ id: number }} the inserted row's id
+ * @returns {{ id: number, wasRedacted: boolean }} the inserted row's id and redaction flag
  */
 export function insertEvent({ timestamp, source, content, projectPath }) {
   if (!VALID_SOURCES.has(source)) {
@@ -98,12 +100,21 @@ export function insertEvent({ timestamp, source, content, projectPath }) {
     throw new Error('timestamp, content, and projectPath are all required.');
   }
 
+  // Redact secrets from terminal commands before storage
+  let safeContent = content;
+  let wasRedacted = false;
+  if (source === 'terminal') {
+    const filtered = redactSecrets(content);
+    safeContent = filtered.content;
+    wasRedacted = filtered.wasRedacted;
+  }
+
   const db = getDb();
   const stmt = db.prepare(
     'INSERT INTO events (timestamp, source, content, project_path) VALUES (?, ?, ?, ?)'
   );
-  const result = stmt.run(timestamp, source, content, projectPath);
-  return { id: Number(result.lastInsertRowid) };
+  const result = stmt.run(timestamp, source, safeContent, projectPath);
+  return { id: Number(result.lastInsertRowid), wasRedacted };
 }
 
 // ---------------------------------------------------------------------------

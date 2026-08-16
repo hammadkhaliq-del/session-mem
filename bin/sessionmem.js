@@ -28,7 +28,7 @@ switch (command) {
     const { getDb, getEvents, closeDb } = await import('../src/db/index.js');
     try {
       const result = flushQueue();
-      console.log(`✅ Flushed ${result.flushed} events (${result.skipped} skipped).`);
+      console.log(`✅ Flushed ${result.flushed} events (${result.skipped} skipped, ${result.redacted} redacted).`);
 
       // Health check: warn if no recent file events exist but terminal events do
       try {

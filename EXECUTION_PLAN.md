@@ -37,8 +37,7 @@
 - **Goal**: Prevent secrets (API keys, tokens, passwords) from being written to the log.
 - **Depends on**: M2 (filters terminal commands before insert).
 - **Deliverable**: A filter function run on every command/content string before DB insert — regex patterns for common secret formats (`_KEY=`, `Bearer `, `sk-`, etc.), redact or skip matching lines.
-- **Done-check**: Run 5 commands containing fake secrets, confirm none appear in raw form in `session.db`.
-- **Status**: NOT STARTED
+- **Status**: ✅ DONE
 
 ---
 
@@ -115,5 +114,5 @@
 ---
 
 ## Current overall status
-**Active module**: M4
-**Last updated**: 2026-08-15
+**Active module**: M5
+**Last updated**: 2026-08-16

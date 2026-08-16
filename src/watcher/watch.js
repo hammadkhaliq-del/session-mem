@@ -1,7 +1,8 @@
 import { watch } from 'node:fs';
-import { appendFileSync, existsSync, mkdirSync, statSync } from 'node:fs';
+import { appendFileSync, existsSync, mkdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import { homedir } from 'node:os';
+import { execSync } from 'node:child_process';
 import { resolveProjectRoot } from '../utils/project-root.js';
 
 // ---------------------------------------------------------------------------
@@ -87,7 +88,22 @@ function getQueuePath() {
   if (!existsSync(dir)) {
     mkdirSync(dir, { recursive: true });
   }
-  return join(dir, QUEUE_FILENAME);
+  const queuePath = join(dir, QUEUE_FILENAME);
+
+  // Set restrictive permissions on queue file at creation — owner-only.
+  if (!existsSync(queuePath)) {
+    writeFileSync(queuePath, '', { mode: 0o600 });
+    // On Windows, also set ACL via icacls (mode flag is POSIX-only)
+    if (process.platform === 'win32') {
+      try {
+        execSync(`icacls "${queuePath}" /inheritance:r /grant:r "%USERNAME%:(R,W)"`, { stdio: 'ignore' });
+      } catch {
+        // Best-effort — don't fail the watcher if ACL command fails
+      }
+    }
+  }
+
+  return queuePath;
 }
 
 // ---------------------------------------------------------------------------

@@ -34,7 +34,7 @@ function getQueueDir() {
  * 4. Delete queue.processing.jsonl on success
  *
  * @param {string} [queueDir] — override the queue directory (for tests)
- * @returns {{ flushed: number, skipped: number }}
+ * @returns {{ flushed: number, skipped: number, redacted: number }}
  */
 export function flushQueue(queueDir) {
   const dir = queueDir ?? getQueueDir();
@@ -46,24 +46,26 @@ export function flushQueue(queueDir) {
 
   let totalFlushed = 0;
   let totalSkipped = 0;
+  let totalRedacted = 0;
 
   // Step 1: Recover interrupted flush if queue.processing.jsonl exists
   if (existsSync(processingPath)) {
     const result = processFile(processingPath);
     totalFlushed += result.flushed;
     totalSkipped += result.skipped;
+    totalRedacted += result.redacted;
   }
 
   // Step 2: Atomic rename queue.jsonl → queue.processing.jsonl
   if (!existsSync(queuePath)) {
-    return { flushed: totalFlushed, skipped: totalSkipped };
+    return { flushed: totalFlushed, skipped: totalSkipped, redacted: totalRedacted };
   }
 
   // Check if queue file is empty
   const stat = readFileSync(queuePath, 'utf-8');
   if (stat.trim().length === 0) {
     unlinkSync(queuePath);
-    return { flushed: totalFlushed, skipped: totalSkipped };
+    return { flushed: totalFlushed, skipped: totalSkipped, redacted: totalRedacted };
   }
 
   renameSync(queuePath, processingPath);
@@ -72,8 +74,9 @@ export function flushQueue(queueDir) {
   const result = processFile(processingPath);
   totalFlushed += result.flushed;
   totalSkipped += result.skipped;
+  totalRedacted += result.redacted;
 
-  return { flushed: totalFlushed, skipped: totalSkipped };
+  return { flushed: totalFlushed, skipped: totalSkipped, redacted: totalRedacted };
 }
 
 /**
@@ -86,13 +89,14 @@ export function flushQueue(queueDir) {
 function processFile(filePath) {
   let flushed = 0;
   let skipped = 0;
+  let redacted = 0;
 
   const content = readFileSync(filePath, 'utf-8');
   const lines = content.split('\n').filter((line) => line.trim().length > 0);
 
   if (lines.length === 0) {
     unlinkSync(filePath);
-    return { flushed, skipped };
+    return { flushed, skipped, redacted };
   }
 
   // Parse all lines first, collect valid events
@@ -121,12 +125,13 @@ function processFile(filePath) {
     db.exec('BEGIN TRANSACTION');
     try {
       for (const event of events) {
-        insertEvent({
+        const result = insertEvent({
           timestamp: event.timestamp,
           source: event.source,
           content: event.content,
           projectPath: event.project_path,
         });
+        if (result.wasRedacted) redacted++;
       }
       db.exec('COMMIT');
       flushed = events.length;
@@ -139,5 +144,5 @@ function processFile(filePath) {
   // Step 4: Delete the processed file only after successful insert
   unlinkSync(filePath);
 
-  return { flushed, skipped };
+  return { flushed, skipped, redacted };
 }
