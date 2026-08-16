@@ -16,7 +16,7 @@ if (-not (Test-Path $__smQueueDir)) {
 # Closes the "any local user can read live secrets in the queue" gap.
 if (-not (Test-Path $global:__sessionmem_queue)) {
     New-Item -ItemType File -Path $global:__sessionmem_queue -Force | Out-Null
-    icacls $global:__sessionmem_queue /inheritance:r /grant:r "${env:USERNAME}:(R,W)" 2>$null | Out-Null
+    icacls $global:__sessionmem_queue /inheritance:r /grant:r "${env:USERNAME}:(M)" 2>$null | Out-Null
 }
 
 function prompt {

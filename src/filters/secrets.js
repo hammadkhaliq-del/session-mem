@@ -123,16 +123,17 @@ export function redactSecrets(content) {
 }
 
 /**
- * Check if a string contains any known secret patterns.
- * Useful for testing — assert that redacted output returns false.
+ * Check if a string contains any unredacted secret patterns.
+ * Useful for testing — returns false when secrets have been successfully redacted.
  *
  * @param {string} content
  * @returns {boolean}
  */
 export function containsSecrets(content) {
+  const unredactedContent = content.replaceAll(REDACTED, '');
   for (const { pattern } of SECRET_PATTERNS) {
     pattern.lastIndex = 0;
-    if (pattern.test(content)) return true;
+    if (pattern.test(unredactedContent)) return true;
   }
   return false;
 }

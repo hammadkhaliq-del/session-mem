@@ -273,6 +273,19 @@ console.log('\nTest 13: Git SHA not redacted (no Tier 2)');
 }
 
 // ---------------------------------------------------------------------------
+// Test 14: containsSecrets helper
+// ---------------------------------------------------------------------------
+
+console.log('\nTest 14: containsSecrets identifies unredacted secrets and passes redacted ones');
+{
+  const raw = 'export API_KEY=sk-test12345678901234567890';
+  const redacted = redactSecrets(raw).content;
+  assert(containsSecrets(raw) === true, 'containsSecrets returns true on raw secret command');
+  assert(containsSecrets(redacted) === false, 'containsSecrets returns false on redacted command');
+  assert(containsSecrets('echo safe command') === false, 'containsSecrets returns false on safe command');
+}
+
+// ---------------------------------------------------------------------------
 // Cleanup
 // ---------------------------------------------------------------------------
 

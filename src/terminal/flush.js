@@ -84,7 +84,7 @@ export function flushQueue(queueDir) {
  * Deletes the file after successful processing.
  *
  * @param {string} filePath — absolute path to the JSONL file
- * @returns {{ flushed: number, skipped: number }}
+ * @returns {{ flushed: number, skipped: number, redacted: number }}
  */
 function processFile(filePath) {
   let flushed = 0;
