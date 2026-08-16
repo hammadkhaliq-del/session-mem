@@ -7,8 +7,16 @@ $global:__sessionmem_last_hist_id = -1
 $global:__sessionmem_queue = Join-Path $env:USERPROFILE ".sessionmem\queue.jsonl"
 
 # Ensure the queue directory exists (one-time on profile load, not per-prompt)
-if (-not (Test-Path (Split-Path $global:__sessionmem_queue))) {
-    New-Item -ItemType Directory -Path (Split-Path $global:__sessionmem_queue) -Force | Out-Null
+$__smQueueDir = Split-Path $global:__sessionmem_queue
+if (-not (Test-Path $__smQueueDir)) {
+    New-Item -ItemType Directory -Path $__smQueueDir -Force | Out-Null
+}
+
+# Set restrictive ACL on queue file at creation — owner-only read/write.
+# Closes the "any local user can read live secrets in the queue" gap.
+if (-not (Test-Path $global:__sessionmem_queue)) {
+    New-Item -ItemType File -Path $global:__sessionmem_queue -Force | Out-Null
+    icacls $global:__sessionmem_queue /inheritance:r /grant:r "${env:USERNAME}:(R,W)" 2>$null | Out-Null
 }
 
 function prompt {
