@@ -12,6 +12,7 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { homedir } from 'node:os';
+import { fileURLToPath } from 'node:url';
 
 /**
  * Parse lines of a .env file into key-value pairs.
@@ -98,7 +99,13 @@ export function loadEnv() {
     current = parent;
   }
 
-  // 2. Also try global ~/.sessionmem/.env
+  // 2. Try global ~/.sessionmem/.env
   const globalEnv = join(homedir(), '.sessionmem', '.env');
   loadEnvFile(globalEnv);
+
+  // 3. Try package installation directory .env (fallback when linked globally)
+  try {
+    const pkgRootEnv = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '.env');
+    loadEnvFile(pkgRootEnv);
+  } catch {}
 }

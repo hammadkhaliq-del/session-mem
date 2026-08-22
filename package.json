@@ -11,10 +11,22 @@
   },
   "scripts": {
     "start": "node bin/sessionmem.js",
-    "test": "node scripts/verify-m1.js && node scripts/verify-m2.js && node scripts/verify-m3.js && node scripts/verify-m4.js && node scripts/verify-m5.js && node scripts/verify-m6.js",
+    "doctor": "node bin/sessionmem.js doctor",
+    "test": "node scripts/verify-m1.js && node scripts/verify-m2.js && node scripts/verify-m3.js && node scripts/verify-m4.js && node scripts/verify-m5.js && node scripts/verify-m6.js && node scripts/verify-m7.js && node scripts/verify-m8.js",
     "eval": "node scripts/eval.js",
     "init-db": "node scripts/init-db.js"
   },
+  "files": [
+    "bin",
+    "src",
+    "hooks",
+    "scripts",
+    "evals",
+    ".env.example",
+    "README.md",
+    "SPEC.md",
+    "EXECUTION_PLAN.md"
+  ],
   "keywords": [
     "session",
     "memory",
