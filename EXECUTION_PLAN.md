@@ -48,14 +48,14 @@
 - **Depends on**: M1–M4 (needs real logged data to test against).
 - **Deliverable**: A function `get_context(query, time_hint=None) -> list[events]` that returns a reasonably-sized, relevant event slice — not the entire DB dumped in.
 - **Done-check**: Given a known logged session, retrieval returns the correct subset of events for at least 3 test time-ranges.
-- **Status**: NOT STARTED
+- **Status**: ✅ DONE
 
 ### M6: LLM query CLI (`sessionmem ask`)
 - **Goal**: Wire retrieval → LLM API → plain-language answer, exposed as a CLI command.
 - **Depends on**: M5.
 - **Deliverable**: `sessionmem ask "<question>"` — sends retrieved context + question to LLM API, prints answer.
 - **Done-check**: Matches SPEC.md Section 5 "Definition of done" — real session, real question, correct specific answer.
-- **Status**: NOT STARTED
+- **Status**: ✅ DONE
 
 ### M7: Eval suite
 - **Goal**: Prove the agent works, not just claim it.

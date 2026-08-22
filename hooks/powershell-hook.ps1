@@ -35,7 +35,10 @@ function prompt {
             $__smDir = $__smParent
         }
         $escapedPath = $__smDir -replace '\\','\\' -replace '"','\"'
-        $ts = Get-Date -Format "o"
+        # UTC with Z-suffix — must match Node's .toISOString() format.
+        # SQLite compares timestamps as raw strings; mixing offsets (+05:00)
+        # with Z-suffix breaks lexicographic ordering.
+        $ts = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffffffZ")
 
         $entry = "{""timestamp"":""$ts"",""source"":""terminal"",""content"":""$escapedContent"",""project_path"":""$escapedPath""}"
         Add-Content -LiteralPath $global:__sessionmem_queue -Value $entry
