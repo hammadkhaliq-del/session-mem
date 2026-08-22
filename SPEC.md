@@ -23,6 +23,7 @@ An agent that logs your coding session across terminal, file edits, and browser 
 ## 4. How you query it
 - CLI tool: `sessionmem ask "what was I debugging yesterday afternoon"`.
 - Under the hood: pull relevant time-windowed events from SQLite → pass as context to LLM API → return plain-language answer.
+- **LLM provider**: OpenAI, default model `gpt-4o-mini`. Chosen for cost ($0.15/1M input tokens — a full day's session log costs fractions of a cent to query), API familiarity, and the fact that structured event log recall is factual extraction, not complex reasoning, so a frontier model isn't needed. Configured via `OPENAI_API_KEY` environment variable.
 - Web chat UI is explicitly OUT of scope until Phase 3 (demo polish). MVP is CLI-only.
 
 ## 5. Definition of "done" (MVP)
