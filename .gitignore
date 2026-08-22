@@ -31,3 +31,11 @@ M5_NOTES.md
 M6_NOTES.md
 M7_NOTES.md
 M8_NOTES.md
+M9_NOTES.md
+
+# Demo artifacts & scripts
+demo/
+DEMO_SCRIPT.md
+scripts/demo.js
+scripts/generate-tts.js
+

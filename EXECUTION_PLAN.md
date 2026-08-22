@@ -80,7 +80,7 @@
 - **Depends on**: M8.
 - **Deliverable**: Short screen recording — real question, real answer, no cuts hiding failures.
 - **Done-check**: Watch it back — would a stranger believe this is real and understand the value in 60 seconds?
-- **Status**: NOT STARTED
+- **Status**: ✅ DONE
 
 ---
 
