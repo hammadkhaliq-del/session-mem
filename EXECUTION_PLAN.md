@@ -62,7 +62,7 @@
 - **Depends on**: M6.
 - **Deliverable**: 8-10 question/expected-answer pairs (per SPEC.md Section 7) built from a real logged session, plus a script that runs all of them and reports pass/fail.
 - **Done-check**: Eval script runs end-to-end and produces a pass rate. Doesn't need 100% — needs to be honest.
-- **Status**: NOT STARTED
+- **Status**: ✅ DONE
 
 ---
 

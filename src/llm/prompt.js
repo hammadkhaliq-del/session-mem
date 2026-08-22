@@ -55,10 +55,11 @@ export function estimateTokens(text) {
  * @param {Array}  options.events            — array of event objects
  * @param {boolean} [options.hasMore=false]  — whether more events exist beyond what's shown
  * @param {{ startTime: string, endTime: string } | null} [options.timeRange] — resolved time window
+ * @param {string | null} [options.timeHint] — optional time hint label (e.g. "yesterday afternoon")
  * @param {number} [options.tokenBudget=12000] — max tokens for the events context
  * @returns {{ messages: Array<{role: string, content: string}>, eventCount: number, truncatedFromBudget: boolean }}
  */
-export function buildPrompt({ question, events, hasMore = false, timeRange, tokenBudget = 12000 }) {
+export function buildPrompt({ question, events, hasMore = false, timeRange, timeHint, tokenBudget = 12000 }) {
   // Format all events as log lines
   let eventLines = events.map(formatEvent);
   let truncatedFromBudget = false;
@@ -78,7 +79,8 @@ export function buildPrompt({ question, events, hasMore = false, timeRange, toke
 
   // Time range header
   if (timeRange) {
-    userContent += `Here are the session events from ${timeRange.startTime} to ${timeRange.endTime}:\n\n`;
+    const hintLabel = timeHint ? ` (matching "${timeHint}")` : '';
+    userContent += `Here are the session events${hintLabel} from ${timeRange.startTime} to ${timeRange.endTime}:\n\n`;
   } else {
     userContent += 'Here are the recent session events:\n\n';
   }

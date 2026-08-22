@@ -12,6 +12,7 @@
   "scripts": {
     "start": "node bin/sessionmem.js",
     "test": "node scripts/verify-m1.js && node scripts/verify-m2.js && node scripts/verify-m3.js && node scripts/verify-m4.js && node scripts/verify-m5.js && node scripts/verify-m6.js",
+    "eval": "node scripts/eval.js",
     "init-db": "node scripts/init-db.js"
   },
   "keywords": [

@@ -219,6 +219,7 @@ switch (command) {
         events: result.events,
         hasMore: result.hasMore,
         timeRange: result.timeRange,
+        timeHint,
       });
 
       if (truncatedFromBudget) {
