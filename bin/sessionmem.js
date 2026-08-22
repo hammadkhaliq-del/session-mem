@@ -259,6 +259,23 @@ switch (command) {
     break;
   }
 
+  case 'doctor':
+  case 'status': {
+    const { runDoctor } = await import('../src/utils/doctor.js');
+    runDoctor();
+    process.exit(0);
+    break;
+  }
+
+  case '--version':
+  case '-v': {
+    const pkgPath = join(__dirname, '..', 'package.json');
+    const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
+    console.log(`sessionmem v${pkg.version}`);
+    process.exit(0);
+    break;
+  }
+
   case undefined:
   case '--help':
   case '-h':
@@ -267,12 +284,14 @@ sessionmem — session memory agent
 
 Usage:
   sessionmem init-db              Create / initialize the database
+  sessionmem doctor               Run system health & configuration diagnostic
   sessionmem flush                Flush queued terminal events to SQLite
   sessionmem watch [directory]    Watch a directory for file changes (default: cwd)
   sessionmem hook show            Print the shell hook for manual installation
   sessionmem context [options]    Retrieve context events (M5)
   sessionmem ask "<question>"     Query your session history
-  sessionmem --help               Show this help message
+  sessionmem --version, -v        Print version information
+  sessionmem --help, -h           Show this help message
 
 Context options:
   --time "<hint>"       Time window (e.g. "today", "yesterday afternoon", "last 2 hours")

@@ -73,7 +73,7 @@
 - **Depends on**: M6, M7.
 - **Deliverable**: `pip install -e .` or `npm link` style install, clear README with setup steps, API key config via `.env`.
 - **Done-check**: A friend (or you, on a clean VM/directory) installs from scratch using only the README and successfully runs `sessionmem ask`.
-- **Status**: NOT STARTED
+- **Status**: ✅ DONE
 
 ### M9: Demo script/recording
 - **Goal**: A 60-second demo that proves it works.
