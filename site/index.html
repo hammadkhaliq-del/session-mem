@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07090d">
+  <title>sessionmem | memory for the work between tabs</title>
+  <meta name="description" content="A local-first session memory agent for modern developers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="grain"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <header class="topbar">
+    <a href="#top" class="wordmark"><span class="mark">s</span><span>sessionmem</span></a>
+    <div class="status"><span class="status-dot"></span> local / recording</div>
+    <nav>
+      <a href="#problem">why</a>
+      <a href="#system">system</a>
+      <a href="#proof">proof</a>
+      <a href="#notes">notes</a>
+    </nav>
+    <a class="top-github" href="https://github.com/hammadkhaliq-del/session-mem" target="_blank" rel="noreferrer">github
+      <span>↗</span></a>
+  </header>
+
+  <main id="top">
+
+    <section class="hero">
+      <div class="hero-left">
+        <div class="kicker"><span class="line"></span> DEVELOPER MEMORY, LOCAL-FIRST</div>
+        <h1>Remember the<br><span>work between</span><br>the tabs.</h1>
+        <p class="hero-copy">sessionmem captures the tiny things you forget five minutes later, commands, file edits,
+          ports, commits and makes them queryable without turning your machine into somebody else's database.</p>
+        <div class="hero-buttons">
+          <a class="btn btn-solid" href="https://github.com/hammadkhaliq-del/session-mem" target="_blank">Inspect the
+            source <span>↗</span></a>
+          <a class="btn btn-line" href="#play">Enter the memory <span>↓</span></a>
+        </div>
+        <div class="hero-micro">
+          <span>MIT</span><span>NODE 22</span><span>SQLITE</span><span>0 RUNTIME DEPS</span>
+        </div>
+      </div>
+
+      <div class="memory-machine" id="machine">
+        <div class="machine-bar">
+          <div class="traffic"><b></b><b></b><b></b></div>
+          <span>~/.sessionmem / context.db</span>
+          <span class="machine-live"><i></i> LIVE</span>
+        </div>
+        <div class="machine-screen">
+          <div class="stream stream-one"><span class="cyan">09:14:02</span> terminal <span class="dim">npm test</span>
+          </div>
+          <div class="stream stream-two"><span class="cyan">09:14:09</span> file <span class="dim">src/server.js</span>
+          </div>
+          <div class="stream stream-three"><span class="cyan">09:14:31</span> terminal <span class="dim">curl
+              localhost:3000/api/health</span></div>
+          <div class="stream stream-four"><span class="cyan">09:15:02</span> git <span class="dim">add express server
+              and auth</span></div>
+          <div class="machine-divider"></div>
+          <div class="question">“what was I doing just before I switched projects?”</div>
+          <div class="machine-answer">
+            <div class="answer-head">MEMORY MATCH <span>4 EVENTS</span></div>
+            <p><strong>15:02</strong> edited <code>src/auth/jwt.js</code></p>
+            <p><strong>15:07</strong> ran <code>npm test</code></p>
+            <p><strong>15:11</strong> tested <code>/api/health</code></p>
+            <p><strong>15:12</strong> committed <code>add express server and auth</code></p>
+          </div>
+          <div class="machine-footer">12,000 token ceiling <span>·</span> redaction on write <span>·</span> UTC time
+          </div>
+        </div>
+        <div class="machine-shadow"></div>
+      </div>
+    </section>
+
+    <section class="numbers">
+      <div><small>INGESTION</small><strong><span class="count" data-target="0.2">&lt;0.2</span><em>ms</em></strong>
+        <p>prompt hook append</p>
+      </div>
+      <div><small>RUNTIME</small><strong><span class="count" data-target="0">0</span></strong>
+        <p>npm dependencies</p>
+      </div>
+      <div><small>EVAL</small><strong><span class="count" data-target="100">100</span><em>%</em></strong>
+        <p>10 / 10 scenarios passed</p>
+      </div>
+      <div><small>CONTEXT</small><strong><span class="count" data-target="12">12</span><em>k</em></strong>
+        <p>defensive token budget</p>
+      </div>
+    </section>
+
+    <section class="problem" id="problem">
+      <div class="problem-lead">
+        <span class="eyebrow">01 / THE PROBLEM</span>
+        <h2>The expensive part of context is the part you already had.</h2>
+      </div>
+      <div class="problem-copy">
+        <p>Switching branches. Opening a new AI chat. Rebooting your editor. Returning after lunch. The work is still
+          there, but the thread is gone.</p>
+        <p class="strong">sessionmem treats developer history like an event stream, not a semantic junk drawer.</p>
+        <div class="principle-strip">
+          <span>EXACT</span><span>LOCAL</span><span>CHRONOLOGICAL</span><span>QUERYABLE</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="play" id="play">
+      <div class="play-heading">
+        <div><span class="eyebrow">02 / ASK THE SESSION</span>
+          <h2>Try a question<br>worth remembering.</h2>
+        </div>
+        <div class="play-note">These interactions mirror the project scenarios: recall, exact command lookup, temporal
+          slicing, and secret safety.</div>
+      </div>
+
+      <div class="query-studio">
+        <aside class="query-sidebar">
+          <div class="sidebar-label">SUGGESTED QUESTIONS</div>
+          <button class="q active" data-scenario="recent"><span>01</span>What was I working on recently?</button>
+          <button class="q" data-scenario="exact"><span>02</span>What was my curl command?</button>
+          <button class="q" data-scenario="time"><span>03</span>What was I doing yesterday afternoon?</button>
+          <button class="q" data-scenario="secret"><span>04</span>What API keys were exported?</button>
+          <div class="sidebar-foot">Press <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> to switch</div>
+        </aside>
+
+        <section class="query-main">
+          <div class="query-toolbar"><span>sessionmem ask</span><span class="query-live">● simulated stream</span></div>
+          <div class="query-line"><span class="prompt">$</span><span id="queryCommand"></span><span
+              class="caret"></span></div>
+          <div class="answer-window">
+            <div class="answer-title">ANSWER <span id="answerBadge"></span></div>
+            <div id="answerBody"></div>
+          </div>
+          <div class="answer-meta" id="answerMeta"></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="system" id="system">
+      <div class="system-intro"><span class="eyebrow">03 / THE SYSTEM</span>
+        <h2>A narrow pipeline<br>with deliberate edges.</h2>
+        <p>No invisible orchestration. Each stage is inspectable.</p>
+      </div>
+      <div class="system-map">
+        <div class="system-line"></div>
+        <article class="sys-card" data-stage="capture">
+          <div class="sys-num">01</div>
+          <div class="sys-icon">⌁</div>
+          <h3>Capture</h3>
+          <p>PowerShell prompt hook + native recursive watcher.</p><code>terminal · file</code>
+        </article>
+        <article class="sys-card active-card" data-stage="store">
+          <div class="sys-num">02</div>
+          <div class="sys-icon">▣</div>
+          <h3>Store</h3>
+          <p>Queue → atomic SQLite transaction, with redaction at the chokepoint.</p>
+          <code>queue.jsonl → session.db</code>
+        </article>
+        <article class="sys-card" data-stage="query">
+          <div class="sys-num">03</div>
+          <div class="sys-icon">⌕</div>
+          <h3>Query</h3>
+          <p>Natural-language time windows become deterministic slices.</p><code>timestamp >= ?</code>
+        </article>
+        <article class="sys-card" data-stage="reason">
+          <div class="sys-num">04</div>
+          <div class="sys-icon">↯</div>
+          <h3>Reason</h3>
+          <p>Structured prompt, 12k budget, native SSE streaming.</p><code>fetch + ReadableStream</code>
+        </article>
+      </div>
+
+      <div class="stage-detail">
+        <div class="detail-label">CURRENTLY INSPECTING</div>
+        <strong id="stageTitle">Store</strong>
+        <p id="stageDescription">The security boundary lives here: known credentials are sanitized before anything
+          crosses into persistent SQLite storage.</p>
+        <span id="stageCode">insertEvent(event) → redact → transaction()</span>
+      </div>
+    </section>
+
+    <section class="contrast">
+      <div class="contrast-top"><span class="eyebrow">04 / THE UNPOPULAR CHOICE</span>
+        <h2>Vector search sounds intelligent.<br>Chronology is intelligent enough.</h2>
+      </div>
+      <div class="contrast-grid">
+        <div class="column bad"><span class="label">VECTOR REFLEX</span>
+          <h3>“Embed everything.”</h3>
+          <p>Great when the question is semantic similarity. Awkward when the question is <em>what happened before 16:00
+              yesterday?</em></p>
+          <div class="fake-query">npm test · npm test · npm test</div>
+        </div>
+        <div class="column arrow">→</div>
+        <div class="column good"><span class="label">SESSIONMEM</span>
+          <h3>“Index the timeline.”</h3>
+          <p>SQLite B-tree indexes preserve exact time, symbols and project boundaries. No embeddings required for a
+            deterministic slice.</p>
+          <div class="real-query">WHERE timestamp BETWEEN ? AND ?</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof" id="proof">
+      <div class="proof-copy"><span class="eyebrow">05 / PROOF</span>
+        <h2>Don't demo the happy path.</h2>
+        <p>The benchmark has to reject false matches, enforce time boundaries, recall exact commands and refuse to
+          hallucinate files that never existed.</p>
+      </div>
+      <div class="eval">
+        <div class="eval-header"><span><i></i> npm run eval</span><strong>10 / 10</strong></div>
+        <div id="evalList"></div>
+        <div class="eval-total"><span>SUMMARY</span><span>100% passed · 11.43s total</span></div>
+      </div>
+    </section>
+
+    <section class="security">
+      <div class="security-left"><span class="eyebrow">06 / SECURITY</span>
+        <div class="security-word">LOCAL<br>MEANS<br>LOCAL.</div>
+      </div>
+      <div class="security-right">
+        <div class="security-card"><span>01</span>
+          <h3>Owner-only queue</h3>
+          <p>Transient <code>queue.jsonl</code> permissions are hardened with Windows ACLs before the queue becomes a
+            durable memory store.</p>
+        </div>
+        <div class="security-card"><span>02</span>
+          <h3>Redact before disk</h3>
+          <p>Known credential patterns are replaced with <code>[REDACTED]</code> at the SQLite insertion boundary.</p>
+        </div>
+        <div class="security-card"><span>03</span>
+          <h3>Only slices leave home</h3>
+          <p>The design sends time-windowed context to the LLM, rather than shipping your full local history.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes" id="notes">
+      <div class="notes-heading"><span class="eyebrow">07 / BUILD LOG</span>
+        <h2>Four decisions<br>that changed the shape.</h2>
+      </div>
+      <div class="notes-list">
+        <article class="note">
+          <div class="note-date">20 AUG 2026 <span>· 5 MIN</span></div>
+          <h3>Vector DBs are overkill for session recall | here's why SQLite won</h3>
+          <p>Developer memory is concrete chronology more often than it is poetic similarity.</p>
+          <div class="tags">ARCHITECTURE · SQLITE · NO-HYPE</div>
+        </article>
+        <article class="note">
+          <div class="note-date">21 AUG 2026 <span>· 4 MIN</span></div>
+          <h3>How a single +05:00 timestamp silently broke my SQLite queries for 3 days</h3>
+          <p>Two valid ISO forms became one invalid sorting strategy.</p>
+          <div class="tags">DEBUGGING · SQLITE · TIMESTAMPS</div>
+        </article>
+        <article class="note">
+          <div class="note-date">21 AUG 2026 <span>· 6 MIN</span></div>
+          <h3>Accidental keyloggers: why we locked down queue.jsonl with Windows ACLs</h3>
+          <p>A shell logger is a security problem until its storage boundary is treated like one.</p>
+          <div class="tags">SECURITY · WINDOWS · PRIVACY</div>
+        </article>
+        <article class="note">
+          <div class="note-date">22 AUG 2026 <span>· 5 MIN</span></div>
+          <h3>Stop guessing if your prompt works: building a 10-case evaluation suite</h3>
+          <p>A repeatable test matrix is more useful than three impressive transcripts.</p>
+          <div class="tags">EVALS · TESTING · ENGINEERING</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="final">
+      <div class="final-symbol">s</div>
+      <span class="eyebrow">08 / OPEN SOURCE</span>
+      <h2>The best memory layer<br>is the one you control.</h2>
+      <p>Read the implementation. Run the evals. Disagree with the architecture.</p>
+      <div class="final-actions">
+        <a class="btn btn-solid" href="https://github.com/hammadkhaliq-del/session-mem" target="_blank">Open GitHub
+          ↗</a>
+        <span class="license">MIT LICENSE · HAMMAD KHALIQ</span>
+      </div>
+    </section>
+  </main>
+
+  <footer><span>sessionmem</span><span>local-first developer tooling</span><span>2026</span></footer>
+  <script src="script.js"></script>
+</body>
+
+</html>
