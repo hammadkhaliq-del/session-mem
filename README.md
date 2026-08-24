@@ -153,11 +153,19 @@ sessionmem ask "summarize my morning session" --verbose
 | `sessionmem --version, -v` | Prints installed CLI version |
 | `sessionmem --help, -h` | Displays help message and available flags |
 
+### Context Options (`sessionmem context`)
+
+- `--time "<hint>"`: Filters events by time window (`"today"`, `"yesterday afternoon"`, `"last 2 hours"`, `"last 7 days"`).
+- `--source <type>`: Filters events by source (`terminal`, `file`, `browser`).
+- `--project <path>`: Filters events to a specific repository or project directory.
+- `--limit <n>`: Maximum number of events to return (default: `50`).
+
 ### Query Options (`sessionmem ask`)
 
 - `--time "<hint>"`: Overrides or explicitly sets time window (`"today"`, `"yesterday afternoon"`, `"last 3 hours"`, `"last 7 days"`).
 - `--model <name>`: Overrides model (default: `gpt-4o-mini`, env: `SESSIONMEM_MODEL`).
 - `--project <path>`: Filters events to a specific repository or project directory.
+- `--limit <n>`: Maximum context events provided to the prompt (default: `200`).
 - `--verbose`: Displays token consumption, event count, and model timing after the answer.
 
 ---
@@ -182,8 +190,8 @@ sessionmem ask "summarize my morning session" --verbose
 
 ## 🧪 Testing & Evaluation Benchmark
 
-### Full Test Suite (M1–M6)
-Runs all unit and integration assertions across ingestion, filtering, retrieval, and LLM formatting:
+### Full Test Suite (M1–M8)
+Runs all unit, integration, and packaging assertions across ingestion, filtering, retrieval, LLM formatting, evaluation, and CLI doctor checks:
 ```powershell
 npm test
 ```
@@ -195,6 +203,16 @@ npm run eval
 
 # Or with verbose reasoning:
 npm run eval -- --verbose
+```
+
+### Interactive 60-Second Demo (M9)
+Runs the interactive 4-act live terminal walkthrough simulating real-time ingestion, secret redaction, streaming recall, and eval benchmark:
+```powershell
+# Step-by-step interactive mode
+npm run demo
+
+# Or auto-playing walkthrough:
+node scripts/demo.js --auto
 ```
 
 ---
@@ -212,10 +230,12 @@ session-mem/
 │   └── powershell-hook.ps1    # Sub-millisecond PowerShell prompt hook
 ├── scripts/
 │   ├── eval.js                # Evaluation CLI runner (npm run eval)
-│   ├── init-db.js             # Database initializer
-│   ├── migrate-timestamps-to-utc.js # UTC migration utility
-│   ├── verify-m1.js ... m6.js # Module test suites
-│   └── verify-m8.js           # CLI packaging verification suite
+│   └── init-db.js             # Database initializer
+├── site/                      # Local developer portfolio & engineering build-log
+|   ├── index.html             # HTML of Webpage
+|   ├── styles.css             # CSS of Webpage
+|   ├── script.js              # JavaScript of Webpage
+|   └── README.md              # Documentation of Project
 ├── src/
 │   ├── db/                    # SQLite database layer (node:sqlite)
 │   ├── filters/               # Tier-1 secret redaction engine
@@ -225,8 +245,8 @@ session-mem/
 │   ├── utils/                 # Project root resolver, .env loader & doctor engine
 │   └── watcher/               # Recursive filesystem change watcher
 ├── .env.example               # Configuration template
-├── EXECUTION_PLAN.md          # Technical milestone roadmap
-└── SPEC.md                    # Core project specification
+├── README.md                  # Session Mem Readme
+└── LICENSE                    # MIT License
 ```
 
 ---

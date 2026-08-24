@@ -32,10 +32,24 @@ M6_NOTES.md
 M7_NOTES.md
 M8_NOTES.md
 M9_NOTES.md
+M10_M11_NOTES.md
 
 # Demo artifacts & scripts
 demo/
 DEMO_SCRIPT.md
 scripts/demo.js
 scripts/generate-tts.js
+SITE_CONTENT_AND_SPECS.md
+EXECUTION_PLAN.md
+SPEC.md
 
+# verify project modules
+verify-m1.js
+verify-m2.js
+verify-m3.js
+verify-m4.js
+verify-m5.js
+verify-m6.js
+verify-m7.js
+verify-m8.js
+migrate-timestamps-to-utc.js

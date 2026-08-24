@@ -91,14 +91,14 @@
 - **Depends on**: Nothing technical — can start anytime, ideally week 1.
 - **Deliverable**: Simple site (even a single well-designed page) with: who you are (one line, not a bio essay), link to sessionmem repo/demo, blog/posts section.
 - **Done-check**: A stranger lands on it and can state back what you do in one sentence.
-- **Status**: NOT STARTED
+- **Status**: ✅ DONE
 
 ### M11: Build-log posts (write DURING build, not after)
 - **Goal**: 3-5 posts documenting real decisions made in Phase 1-2.
 - **Depends on**: Whatever module you're currently writing about (e.g. write the "why SQLite not a vector DB" post right after M5, while the reasoning is fresh).
 - **Deliverable**: Posts published incrementally, not batched at the end.
 - **Done-check**: Each post describes a real tradeoff you actually faced, not a generic tutorial.
-- **Status**: NOT STARTED (0/5)
+- **Status**: ✅ DONE (4 published in site/posts/posts.js)
 
 ---
 
