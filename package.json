@@ -15,6 +15,7 @@
     "test": "node scripts/verify-m1.js && node scripts/verify-m2.js && node scripts/verify-m3.js && node scripts/verify-m4.js && node scripts/verify-m5.js && node scripts/verify-m6.js && node scripts/verify-m7.js && node scripts/verify-m8.js",
     "eval": "node scripts/eval.js",
     "demo": "node scripts/demo.js",
+    "video-demo": "node --no-warnings scripts/video-demo.js",
     "init-db": "node scripts/init-db.js"
   },
   "files": [
@@ -35,5 +36,9 @@
     "developer-tools",
     "cli"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@google/genai": "^2.19.0",
+    "wav": "^1.0.2"
+  }
 }
